@@ -1,0 +1,54 @@
+BST_____________________________
+Complexity to search in a balanced binary tree is O(logn)
+
+in order: LrR
+pre order:rLR
+post order:LRr
+
+
+RED BLACK TREES_________________
+Properties: 
+parent
+key
+left child
+right child
+color
+
+Rules:
+1. A node is either red or black
+2. The root node is black
+3. Every leaf(NULL) node is black 
+4. If a node is red, then both of its children must be black 
+5. For each node in the tree, all path from that node to the leaf nodes contain the same number of black nodes 
+
+-Q: if a node is black, both children must be red -> false
+-Q: leaf nodes in an RB tree have the same structure as the other nodes, except they are empty -> true
+-Q: node in a RB tree can be recolored (to balance for instance)
+-Q: when you add a node to the RB tree it is always red
+-Q: when a node is added to a tree, the two properties that can be violated are..
+	-the root must be black 
+	-the children of a red node must be black 
+	-distance of black nodes to root could be uneven 
+-Q: A new node can't have a 'red' uncle -> false, uncle = parent parent left 
+-Q: When the replacement node for the node to be deleted is BLACK, the resultant tree is in violation and needs to be rebalanced 
+-Complexity to search, insert and delete of height O(logn) is O(logn)
+
+
+GRAPHS______________________________
+-Q: In an adjacentcy matrix for an unweighted graph, the distance from a place to itself is 0, and a non existent edge between two vertices is denoted as -1
+-Q: Max number of directed edges possible in a graph with n vertices is n*(n-1)
+-Q: The graph implementation uses vectors instead of an array or a linked list to simplify memory management 
+-Q: Which structure: "Is vertex1 adj to vertex n"? -> adjacent matrix 
+-Q: Insert element into vector using push_back()
+-Q: When a vertex is added to the vertices vector, you do not need to explicitly allocated memory for the new vertex (the vertices vector does this for you)
+-Q:In a weighted graph, the path with the lowest weight won't necessarily be the one with the fewest edge traversal
+-Q: The shortest distance in a weighted graph, where the edge weights are positive or negative integers can be found using Dijkstra's also -> false 
+
+Breadth-first search_______
+-Evaluating the vertices at the same level of a graph before evaluating nodes at a deeper level
+-finds the shortest distance in an unweighted graph, where the shortest distance is the path that traverses the fewest number of edges 
+
+Djikstra__________________
+-Greedy approach (takes best thing at that node)
+-Always finds the shortest path
+-What is the max number of edges present in a undirected graph with 7 vertices? -> 21 (7 * 6) / 2 .. 7 vertexes with 6 different edges, but unweighted so edge counts to and from 

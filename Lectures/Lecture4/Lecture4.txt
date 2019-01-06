@@ -1,0 +1,6 @@
+Algorithms:
+- Determine the worst case scenario 
+	Ex:
+	Array[10] = n
+	Array[10][10] = n^2
+

@@ -1,0 +1,443 @@
+Stacks:
+	Last in, first out 
+	The last element added to the stack is the first element removed from the stack, much like a stack of cafeteria plates
+	Elements are added to the top of the stack, and the element on the top is the only element that can be removed
+
+	Array implementation of a stack -> index refers to where the next element will be added
+	When top = 0, the stack is empty
+	When top = maxSize, the stack is full -> maxSize is the size of the array
+
+	Linked list implementation of a stack -> each element in the stack are nodes, where each node has a pointer to the previous node in the list 
+	Node at the bottom of the list has a previous pointer to null
+	When top = NULL, the stack is empty
+	When count = maxSize, the stack is full
+
+Queues:
+	First in, first out 
+	the first element added to the queeu is the first element removed from the queue, much like the line at a grocery store 
+	Elements are enqueued at the tail of the queue
+	Elements are dequeued at the head to the queue 
+
+	Array implementation of a queue->
+	Simplest, but least efficient, array implementation involves shifting the elements when the head element is deqeued 
+		Inefficient because all words are shifted down by one 
+		O(n) is worst case when array is full
+	More efficient way is to build a queue and let head and tail positions wrap around back the beginning of the array
+
+	Features of a circular queue:
+		Both tail and head can wrap around from the last position in the array back to the beginning 
+		The condition where head = tail can mean tha the queue is emptry or full
+
+	Linked List implementation of a queue->
+		head and tail are nodes in the list
+		size of the queue can change dynamically
+		each node has a pointer to the next node in the list
+		tail node is the last node and it has a next poitner to NULL
+			In a circular implementation, the tail node points to the head node as the next node in the list
+
+
+Binary Trees:
+	Pointers in a binary tree:
+		parent
+		left child
+		right child
+	Parent node properties
+		each node in the tree has a parent
+		each parent node has at most two children, a left and a right child
+	Root node properties
+		the topmost node is the root
+		the parent of the root is NULL
+	Node properties
+		each node has a key that identifies it 
+		if a node doesnt have a left child then its left child is NULL
+		if a node doesnt have a left or a right child then it is called a leaf node
+
+	Binary search trees ->
+		for any node in the tree, the nodes in the left sub-tree of that node all have a value less than the node value
+		the nodes in the right subtree all have a greater or equal value to the node
+
+	Height of a tree -> the number of edges between the root and the deepest leaf node 
+
+	****Deleting and Inserting Node****
+
+
+Recursion:
+	process of a function calling itself 
+	recrusive algorithm rules
+		base case: smallest unit of the problem that can be defined. once the base case is reached, the algorithm should return without additional recursive calls
+		a set of rules that can reduce all cases down to the base case: the base case is the exit strategy for a recursive algorithm. if the algorithm never reaches the base case, then it will never exit
+	Tree traversal algorithms ->
+		In order - nodes are visited in the order left child - parent - right child, which can generate a sorted output in a BST
+		Pre order - nodes are visited in the order parent - left child - right child 
+		Post order - nodes are visited left child - right child - parent
+
+
+Tree Balancing:
+	When the BST is balanced with a height of O(log n), the complexity of insert, search, and delete operations is also O(log n), where n is the number of nodes in the tree
+	Unbalanced tree, the complexity is O(n) in the worst case
+	Tree balancing algorithms are applied to ensure the tree remains balanced with an (O log2 n) height and same complexity
+
+	Red Black Trees -> each node is assigned a color and the nodes in the tree are ordered such that no path from root to leaf can be more than twice as long as any other path 
+
+		Property 1: A node is either red or black
+		Property 2: The root node is black
+		Property 3: Every leaf (NULL) node is black
+		Property 4: If a node is red, then both of its children must be black
+		Property 5: For each node in the tree, all paths from that node to the leaf nodes contain the same number of black nodes
+
+		In red black trees, the leaf nodes are external sentinel nodes with all of the same properties as regular nodes, but they are effectively empty nodes
+
+		Left and right rotations ->
+			rotations are local operations on nodes that reorder the nodes such that red black balancing properties are preserved 	
+
+			***see 11.1.4 in book for rotation visualizations***
+
+
+		Inserting into R/B tree ->
+			If x is a node added to the red-black tree, then the initial conditions on x are:
+				x.color = red
+				x.left = null
+				x.right = null
+
+			When a node is added to the tree, the two properties that can be violated are
+				1. The root must be black
+				2. The children of a red node must be black
+
+			Violations depend on "uncle's" color -> if x's parent were a right child then x.parent.parent.left = x's uncle 
+
+				Case 1: The "uncle" node is red
+					1. Recolor both the parent and the uncle of the new node to be black, and recolor the parent.parent of the new node to be red.  This resolves the violation up to the parent.parent level of the tree
+					2. Move up two levels in the tree by setting x=x.parent.parent
+					3. Repeat steps 1 and 2 until x is the root of the tree or x's parent is black
+
+				Case 2: The new node is a right child and its uncle is black
+					1. x = x.parent
+					2. apply left rotate to x to convert case 2 into case 3, the new node is now a left child of its parent
+				Case 3: The new node is a left child and its uncle is black
+					1. recolor x.parent and x.parent.parent
+					2. apply a rught rotation about x.parent.parent on the tree 
+
+			*****Deleting Node*****
+
+Graphs:
+	Adjacency matrix:
+		Structure for representing direct connections between entities in a graph, such as locations. If there is a direction connection between two entities, it means they are adjacent and there is a 1 at that location in the matrix.  If there isnt a direct connection, they are not adjacent an there is a 0 at that location in the matrix
+
+		First row represents scenario of starting in that left hand city and going directly to another location at the top 
+
+		Adjacency - list representation: -> vertices in the graph are stored in an array, each vertex in the array contains a pointer to a list of its adjacent vertices
+
+	Directed and Undirected Graphs:
+		Undirected Graph -> Edge between two vertices exists in both directions, for example an edge between Denver and Lincoln also means there is an edge between Lincoln and Denver
+
+		Directed Graph -> the edges between two vertices have a direction assoaciated with them, and the edge may be different, or not exist, in one direction.  There is a pthat from Denver to Lincoln, but not the other direction
+			An adjacency matrix or list can capture a directed graph
+			Directed graph = arrows 
+
+	Weighted Graphs 
+
+
+
+
+Stack Quiz:
+	- Whenever you pop a word from the stack, you add it to the Message Board
+		push(Life)
+		push(is)
+		push(either)
+		pop()
+		pop()
+		push(a)
+		pop()
+		push(daring)
+		push(adventure)
+		pop()
+		pop()
+		push(or)
+		push(nothing)
+		pop()
+	- new message = "either is a adventure daring nothing"
+
+	- Stop executing commands once the stack is full, stack size = 4
+		push(-90)
+		push(34)
+		pop()
+		push(-74)
+		push(0)
+		pop()
+		pop()
+		pop()
+		push(23)
+		push(87)
+		push(100)
+		pop()
+		push(45)
+		push(12)
+		push(-999)
+	- stack from top to bottoom = 12 45 87 23 
+
+
+Queue Quiz:
+-   Enqueue(12)
+	Enqueue(10)
+	Dequeue( )
+	Dequeue( )
+	Enqueue(5)
+	Dequeue( )
+	Enqueue(15)
+	Enqueue(7)
+
+	First dequeue removes: 12
+	second removes: 10
+	third removes: 5
+
+	Queue: -1 -1 -1 15 7 -1
+
+-	Enqueue(7)
+	Enqueue(12)
+	Dequeue()
+	Enqueue(9)
+	Enqueue(16)
+	Dequeue( )
+	Enqueue(11)
+	Enqueue(21)
+	Dequeue( )
+
+	First dequeue removes: 7
+	second removes: 12
+	third removes: 9
+
+	Queue: -1 -1 -1 16 11 21
+
+
+BST Quiz:
+	     K
+	   / |  \
+	  M  R   T
+	  |  | \
+	  Q  Y   X
+	  Which nodes are leaf nodes?
+	  	T, Q, Y, X
+
+           7
+         /   \
+       5       9
+      / \     /  \
+     3   6   8    15
+    /         
+   2     
+	Which of the following is true based on the above tree?
+		node 8 is a leaf - True
+		the height of the tree is 4 - False
+		the degree of node 9 is 1 - False
+		node 6 is a parent - False
+
+
+
+	If I was looking for a key in a Full Binary Search Tree, the following algorithm would work correctly. The assumption for this question is that the key exists in the tree.
+
+		Node* searchElement(Node* root, int searchKey)
+		{
+			if(root != NULL)
+			{
+				if(root -> key == searchKey)
+					return root;
+				else if(searchKey > root -> key)
+					searchElement(root -> left, searchKey);
+				else
+					searchElement(root -> right, searchKey);
+			}
+		} 	  
+
+		False - this would not work 
+
+BST Quiz:
+
+	If I consider the root at level 0, what is the max number of nodes at level i of a BST?
+		2^i
+
+	For a BST, traversing the tree in the following sequences are called (i)________________ , (ii)_____________ ,and  (iii)_____________ respectively?
+
+		i. root, left, right
+
+		ii. left, root, right
+
+		iii. left, right, root
+
+		Preorder, inorder, postorder 
+
+
+	            A
+              /   \
+             B	   C
+            / \   / \
+           D   E F   G
+    For the following tree what would the preorder traversal sequence be?
+    	ABDECFG
+
+
+   If you were asked to print the elements of a BST in a strictly ascending order, which traversal of the tree would you print?
+   		In order
+
+???????????? BST Quiz for fun - wont be graded Number 3 
+
+Red Black Tree Quiz:
+		    10
+		   /  \
+		  8   15
+		      / \    
+	         14  19
+	After performing a left rotation on the root node, select the correct pre order traversal
+		15,10,8,14,19
+
+		    10
+		   /  \
+		  8    15
+		 / \    
+	    4   9
+	   / \
+	  2   5
+	After performing a right rotation on the root, enter the height of the tree
+		2
+
+	        10
+		   /  \
+		  8    15
+		       / \    
+	         13  19
+	         / \
+	        12 14
+
+	Will performing a left rotation on the rood ensure that all leaf nodes are at the same level?
+		No
+
+Red Black Tree Quiz:
+
+	If x is a node added to a red black tree, then initially x.color = ?
+		Red
+
+	When a node is added to the tree, the two properties that can be violated are:
+		the children of a red node must be black
+		the root must be black 
+
+	A new node can have a red uncle?
+		False 
+
+
+Red Black Tree Quiz:
+	Given the following R/B tree, inserting and deleting the key 29 will resuilt in the same tree
+
+           25B
+          /   \
+        18B    34R
+              /   \
+            30B    36B
+           /
+         28R
+
+        True 
+
+     When the replacement node for the node to be deleted is ____ in color, the resultant tree is in violating of the properties of the red black tree and needs to be balanced using rotation or recoloring or both
+
+     	Black 
+
+Red Black Tree Quiz:
+
+	What is the complexity of search, insert, and delete operations in a red-black tree of heigh O(log n)
+
+		O(log n)
+
+	If a node is black, both of its children must be red
+		False
+
+	The representation of leaf nodes in a RB tree is different from that in a BST, The leaf nodes in a RB tree have the same node structure as other nodes in the tree except for the fact they are empty 
+		True 
+
+Graph Quiz: 3-16-18
+	
+	A complete graph is one in which each vertex is connected to every other vertex. Now, consider a complete graph for n vertices. Using which structure whould answer the following question faster?
+	"Is vertex1 adjacent to vertex n?"
+
+		Adjacency Matrix
+
+	You can insert an element into a vector using the vector _____ method
+
+		push_back()
+
+	What would be the output of the following code snippet?
+
+		#include <vector>
+		#include <iostream>
+		//...
+
+		std::vector<int> array;
+		int i = 999; 
+		array.reserve(10);
+		array.push_back(i);
+		std::cout<<array.capacity()<<std::endl;
+		std::cout<<array.size()<<std::endl;
+
+			10
+			1
+
+	Consider the below declaration for vertex and verticies 
+
+		struct vertex{
+
+		    std::string key;
+
+		    std::vector<adjVertex> adjacent;
+
+		}
+
+		std::vector <vertex> vertices
+
+		When a vertex is added to the vertices vector, you need to explicitely allocate memory for the new vertex?
+
+			False
+
+Graph Quiz:
+	In an undirected graph G with vertices A, B, C, and D, if a path exists from vertex A to vertex B, there exists a path from vertex B to vertex A.
+
+		True
+
+	The adjacency matrix for a directed graph with only one undirectional edge between vertices is symmetric
+
+		False
+
+Graph Quiz:
+	In an adjacency matrix for an undirected weighted graph, the distance from a place to itself is entered as ______ and a non existing edge between vertices is entered as _______
+	 	
+	 	0, -1
+
+	 What is the max number of directed edges possible in a graph with n vertices?
+
+	 	n* (n-1)
+
+	 The graph implementation uses vectors instead of an array or a linked list to simplify the memory management of the graph
+
+	 	True 
+
+Graph Quiz:
+	Evaluating the vertices at the same level of a graph before evalutating nodes at deeper leves is a ______ evaluation
+
+		breadth-first
+
+Graph Quiz:
+	In a weighted graph, the path with the lowest weight won't necessarily be the path that traverses the fewest number of edges
+		True
+
+	Djikstra's algorithm follows a _____ approach
+		Greedy 
+
+	The shortest distance in a weighted graph, where the edge weights are positive or negative integers, can be found using Dijkstra's aglorithim
+		False
+
+	What is the max number of edges present in a simple undirected graph with 7 vertices?
+		21
+
+	The breadth-first search algorithms finds the shortest distance in an unweighted graph, where the shortest distance is the path that traverses the fewest number of edges
+		True 
+
+
+
+
